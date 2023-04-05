@@ -56,3 +56,8 @@ class PostView(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+"""
+CASCADE :  (ex:) delete comment if user deleted
+PROTECT :  prevent deleting (ex:) a Category
+"""
