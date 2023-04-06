@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <div class="card-wrapper" style="display:flex; max-width: 95vw; flex-wrap: wrap;">
+    <div class="card-wrapper" style="display:flex; gap: 1rem; max-width: 95vw; flex-wrap: wrap;">
     {% for object in object_list %}
-        <div class="card-container" style="width: 300px">
+        <div class="card-container" style="width: 300px;">
             <a href="{% url 'blog:detail' object.slug %}">
                 <h3>{{ object.title }}</h3>
             </a>
-            <img src="{{ object.image.url }}" alt="" width="300px">
+            <img src="{{ object.image.url }}" alt="" width="300px" height="200px" style="object-fit: cover;">
             <p>{{ object.content | truncatechars:150 }}</p> 
         </div>
     {% endfor %}
