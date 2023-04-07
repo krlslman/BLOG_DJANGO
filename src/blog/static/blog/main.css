@@ -1,17 +1,27 @@
-.album .card a {
-    text-decoration: none !important;
-}
+/*  Django looks for static folder in each app for default. 
+    If you'll use only one folder for all apps, then you declare it in settings.py > STATICFILES_DIRS = [BASE_DIR / "static"]
+*/
+
 
 /* dev mode - DARK */
 body {
     /* background-color: rgb(48, 48, 48);
     color: black; */
 }
-
+.navbar-nav {
+    margin: auto;
+    align-items: center;
+}
+.navbar-nav .nav-item {
+    display: flex;
+}
 .album .card {
     height: 490px;
     /* max-height: 476px; */
     box-shadow: 0 20px 30px -15px rgba(2,12,27,.7);
+}
+.album .card a {
+    text-decoration: none !important;
 }
 .album .card .card-body {
     display: flex;
@@ -22,11 +32,13 @@ body {
     height: 100%;
 }
 .album .card .card-body .btn-group {
-    /* margin: auto; */
+    flex-wrap: nowrap;
+    margin: auto;
     width: 80%;
 }
-.album .card .card-body .btn-group span {
+.album .card .card-body .btn-group i::before {
     padding: 5px;
+    padding-right: 10px;
 }
 #blog-image-container {
     width: -webkit-fill-available;

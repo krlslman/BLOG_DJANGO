@@ -78,43 +78,46 @@
     }
   </style>
 
-<!-- HEADER CONTENT -->
-<header>
-    <div class="px-3 py-2 text-bg-dark">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="60" height="60" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-          </a>
 
-          <ul class="nav col-12 col-lg-auto m-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-              <a href="{% url 'blog:list' %}" class="nav-link text-secondary">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="{% url 'blog:create' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
-                Add New Post
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
-                About
-              </a>
-            </li>
-          </ul>
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 py-2" aria-label="Fourth navbar example">
+    <div class="container container-fluid p-0">
+      <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+        <svg class="bi me-2" width="60" height="60" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-0 gap-lg-2">
+          <li class="nav-item">
+            <a href="{% url 'blog:list' %}" class="nav-link active text-secondary" aria-current="page">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'blog:create' %}" class="nav-link text-secondary" aria-current="page">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+              Add New Post
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="" class="nav-link text-secondary" aria-current="page">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
+              About
+            </a>
+          </li> -->
+        </ul>
+        <div class="endpart d-flex gap-1 justify-content-center">
+          <form role="search" class="col-6 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input class="form-control form-control-dark text-bg-dark" type="search" placeholder="Search" aria-label="Search">
           </form>
-          <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
+          <div class="text-end d-flex">
+            <button type="button" class="btn btn-outline-light me-2" style="min-width: fit-content; height: 37px;">Login</button>
+            <button type="button" class="btn btn-warning" style="min-width: fit-content; height: 37px">Sign-up</button>
           </div>
         </div>
       </div>
     </div>
-  </header>
+  </nav>
