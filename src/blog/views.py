@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
+from .models import Post, Like
 from .forms import PostForm, CommentForm
+from django.http import HttpResponse
 
 
 def post_list(request):  # to list our post on the page
@@ -68,3 +69,13 @@ def post_delete(request, slug):
     }
     return render(request, "blog/post_delete.html", context)
 
+def like(request, slug):
+    if request.method == 'POST':
+        obj = get_object_or_404(Post, slug=slug)
+        like_qs = Like.objects.filter(user=request.user, post=obj)
+        if like_qs.exists():
+            like_qs[0].delete()
+        else:
+            Like.objects.create(user=request.user, post=obj)
+        return redirect('blog:detail', slug=slug)
+    

@@ -17,15 +17,39 @@
             </button>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">
                 <span><i class="fa-sharp fa-regular fa-eye">{{ object.view_count }}</i></span>
-            </button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
-                <span><i class="fa-regular fa-heart"></i>{{ object.like_count }}</span>
-            </button>
+            </button>            
+            <form action="{% url 'blog:like' object.slug %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="post ">
+                <input type="hidden" name="user ">
+                <button type="submit" class="btn btn-outline-secondary btn-lg px-4">
+                    <span><i class="fa-regular fa-heart"></i>{{ object.like_count }}</span>
+                </button>
+            </form>
             </div>
+            
+            <form action="" method="POST" class="d-flex flex-column">
+                <style>
+                    #id_content { border-radius: 1rem; border: lightgray solid 1px; font-size: 1.5rem; height: 200px; padding: 1rem; }
+                </style>
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-primary my-3">Comment</button>
+            </form>
+
+            {% for c in object.comments %}
+            <div class="comment-container rounded m-2" style="padding: 1rem; border: lightgray solid 1px;">
+                <div class="upper d-flex justify-content-between">
+                    <p class="mb-0 text-muted text-end">By @{{ c.user }}</p>
+                    <p class="mb-0 text-muted text-start">Date</p>
+                </div>
+                <p class="lead pb-1">{{ c.content }}</p>
+            </div>
+            {% endfor %}
+            
+
         </div>        
     </div>
     
+    
 {% endblock content %}
-
-
-
