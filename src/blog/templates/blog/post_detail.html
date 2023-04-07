@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h1>{{ object.title }}</h1>
-    <img src="{{ object.image.url }}" alt="">
-    <p>{{ object.content }}</p> 
+    <div class="px-4 my-5 text-center border-bottom">
+        <h1 class="display-4 fw-bold">{{ object.title }}</h1>
+        <div class="overflow-hidden">
+            <div class="container px-5">
+                <img src="{{ object.image.url }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy" style="max-height: 40vh; object-fit: cover;">
+            </div>
+        </div>
+        <div class="col-lg-6 mx-auto my-4">
+            <p class="lead mb-4">{{ object.content }}</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            </div>
+        </div>        
+    </div>
     
 {% endblock content %}
+
+
+

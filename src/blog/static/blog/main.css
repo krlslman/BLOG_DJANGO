@@ -1,3 +1,40 @@
-.card-container a {
+.album .card a {
     text-decoration: none !important;
+}
+
+/* dev mode - DARK */
+body {
+    /* background-color: rgb(48, 48, 48);
+    color: black; */
+}
+
+.album .card {
+    height: 490px;
+    /* max-height: 476px; */
+    box-shadow: 0 20px 30px -15px rgba(2,12,27,.7);
+}
+.album .card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.album .card .card-body .card-text {
+    height: 100%;
+}
+.album .card .card-body .btn-group {
+    /* margin: auto; */
+    width: 80%;
+}
+.album .card .card-body .btn-group span {
+    padding: 5px;
+}
+#blog-image-container {
+    width: -webkit-fill-available;
+    width: fill-available;
+    height: 200px;
+}
+#blog-image {
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
 }
