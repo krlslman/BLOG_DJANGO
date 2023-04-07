@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 
 def post_list(request):  # to list our post on the page
@@ -28,9 +28,20 @@ def post_create(request):
     return render(request, "blog/post_create.html", context)
 
 def post_detail(request, slug):
+    form = CommentForm()
     obj = get_object_or_404(Post, slug=slug)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = obj
+            comment.save()
+            return redirect("blog:detail", slug=slug)
+            # return redirect(request.path)  # alternative way, to go same page
     context = {
-        "object": obj
+        "object": obj,
+        "form": form,
     }
     return render(request, "blog/post_detail.html", context)
 
@@ -56,3 +67,4 @@ def post_delete(request, slug):
         "object": obj
     }
     return render(request, "blog/post_delete.html", context)
+
