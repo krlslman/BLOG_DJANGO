@@ -29,8 +29,25 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=OPTIONS, default='d')
     slug = models.SlugField(blank=True, unique=True)
+
     def __str__(self):
         return self.title
+    
+    def comment_count(self):
+        """
+        Comment is 1-1 and has 'post' key that we want to count and that is from Post class.
+        So we need to count 'post' in Comment class.
+        Thnx to orm structure of django, we can access this with using '_set.all()'.
+        classname should be written in lowercase:
+        classname_set.all() gives us all that classname has from this class.
+        """  
+        return self.comment_set.all().count()
+    
+    def view_count(self):
+        return self.postview_set.all().count()    
+    
+    def like_count(self):
+        return self.like_set.all().count()
     
 
 class Comment(models.Model):
