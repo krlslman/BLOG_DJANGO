@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if user.id == object.author.id  %}
+    <div class="admin-buttons text-end">
+        <button type="submit" class="btn btn-lg px-4">
+            <a href="{% url 'blog:update' object.slug %}"><i class="fa-solid fa-pen"> Update</i></a>
+        </button>
+        <button type="submit" class="btn btn-lg px-4">
+            <a href="{% url 'blog:delete' object.slug %}"><i class="fa-solid fa-trash text-danger"> Delete</i></a>
+        </button>
+    </div>
+
+    {% endif %}
     <div class="px-4 my-5 text-center border-bottom">
         <h1 class="display-4 fw-bold">{{ object.title }}</h1>
         <div class="overflow-hidden">
