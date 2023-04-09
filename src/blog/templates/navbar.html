@@ -114,8 +114,10 @@
             <input class="form-control form-control-dark text-bg-dark" type="search" placeholder="Search" aria-label="Search">
           </form>
           <div class="text-end d-flex">
-            <button type="button" class="btn btn-outline-light me-2" style="min-width: fit-content; height: 37px;">Login</button>
-            <button type="button" class="btn btn-warning" style="min-width: fit-content; height: 37px">Sign-up</button>
+            <!-- <button type="button" class="btn btn-outline-light me-2" style="min-width: fit-content; height: 37px;">Sign In</button>
+            <button type="button" class="btn btn-warning" style="min-width: fit-content; height: 37px">Sign Up</button> -->
+            <!-- <a href="" type="button" class="btn btn-outline-light me-2" style="min-width: fit-content; height: 37px;">Sign In</button> -->
+            <a href="{% url 'register' %}" class="btn btn-warning" style="min-width: fit-content; height: 37px">Sign Up</a>
           </div>
         </div>
       </div>
