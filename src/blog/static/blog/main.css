@@ -65,3 +65,18 @@ body {
     width: inherit;
     height: inherit;
 }
+
+.account-img {
+    height: 180px;
+    width: 180px;
+    object-fit: cover;
+}
+.media {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.media .textarea {
+    height: 5rem;
+}
