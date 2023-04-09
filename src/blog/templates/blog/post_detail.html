@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     {% if user.id == object.author.id  %}
@@ -10,56 +11,58 @@
             <a href="{% url 'blog:delete' object.slug %}"><i class="fa-solid fa-trash text-danger"> Delete</i></a>
         </button>
     </div>
-
     {% endif %}
-    <div class="px-4 my-5 text-center border-bottom">
-        <h1 class="display-4 fw-bold">{{ object.title }}</h1>
-        <div class="overflow-hidden">
-            <div class="container px-5">
-                <img src="{{ object.image.url }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy" style="max-height: 40vh; object-fit: cover;">
-            </div>
-        </div>
-        <div class="col-lg-6 mx-auto my-4">
-            <p class="lead mb-4">{{ object.content }}</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-            <!-- <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Primary button</button> -->
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
-                <span><i class="fa-regular fa-comment"></i>{{ object.comment_count }}</span>
-            </button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">
-                <span><i class="fa-sharp fa-regular fa-eye">{{ object.view_count }}</i></span>
-            </button>            
-            <form action="{% url 'blog:like' object.slug %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="post ">
-                <input type="hidden" name="user ">
-                <button type="submit" class="btn btn-outline-secondary btn-lg px-4">
-                    <span><i class="fa-regular fa-heart"></i>{{ object.like_count }}</span>
-                </button>
-            </form>
-            </div>
-            
-            <form action="" method="POST" class="d-flex flex-column">
-                <style>
-                    #id_content { border-radius: 1rem; border: lightgray solid 1px; font-size: 1.5rem; height: 200px; padding: 1rem; }
-                </style>
-                {% csrf_token %}
-                {{ form }}
-                <button type="submit" class="btn btn-primary my-3">Comment</button>
-            </form>
 
-            {% for c in object.comments %}
-            <div class="comment-container rounded m-2" style="padding: 1rem; border: lightgray solid 1px;">
-                <div class="upper d-flex justify-content-between">
-                    <p class="mb-0 text-muted text-end">By @{{ c.user }}</p>
-                    <p class="mb-0 text-muted text-start">Date</p>
+    <div class="container">
+        <div class="px-4 my-5 text-center border-bottom">
+            <h1 class="display-4 fw-bold">{{ object.title }}</h1>
+            <div class="overflow-hidden">
+                <div class="container px-5">
+                    <img src="{{ object.image.url }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy" style="max-height: 40vh; object-fit: cover;">
                 </div>
-                <p class="lead pb-1">{{ c.content }}</p>
             </div>
-            {% endfor %}
-            
-
-        </div>        
+            <div class="col-lg-6 mx-auto my-4">
+                <p class="lead mb-4">{{ object.content }}</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-between align-items-center mb-5">
+                    <div class="icons d-flex justify-content-center">
+                        <span class="p-2"><i class="fa-regular fa-comment"></i> {{ object.comment_count }}</span>
+                        <span class="p-2"><i class="fa-sharp fa-regular fa-eye"> {{ object.view_count }}</i></span>
+                        <form action="{% url 'blog:like' object.slug %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="post ">
+                            <input type="hidden" name="user ">
+                            <button type="submit" class="btn p-2 ">
+                                <span><i class="fa-regular fa-heart"></i> {{ object.like_count }}</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="create-time-info">
+                        <span><i class="fa-regular fa-clock" style="color: #dbdbdb;"></i> {{ object.publish_date }}</span>
+                    </div>
+                </div>
+                <p class="lead mb-4">Leave a comment below</p>
+                <form action="" method="POST" class="d-flex flex-column">
+                    <style>
+                        #id_content { border-radius: 1rem; border: lightgray solid 1px; font-size: 1rem; height: 200px; padding: 1rem; }
+                    </style>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary w-50 mx-auto my-3">Comment</button>
+                </form>
+    
+                {% for c in object.comments %}
+                <div class="comment-container rounded m-2" style="padding: 1rem; border: lightgray solid 1px;">
+                    <div class="upper d-flex justify-content-between">
+                        <p class="mb-0 opacity-50 text-end">By @{{ c.user }}</p>
+                        <p class="mb-0 opacity-50 text-start">{{ c.time_stamp|timesince }} ago</p>
+                    </div>
+                    <p class="lead pt-2 m-2">{{ c.content }}</p>
+                </div>
+                {% endfor %}
+                
+    
+            </div>        
+        </div>
     </div>
     
     

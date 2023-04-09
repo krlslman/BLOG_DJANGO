@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
     <!-- <h1>hello</h1> -->
-    <p>Are you sure delete {{ object.title }} </p>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <a href="{% url 'blog:list' %}">Cancel</a>
-        <button type="submit">Yes</button>
-    </form>
+    <div class="container d-flex flex-column align-items-center">
+        <p class="lead">Are you sure you want to delete "{{ object.title }}" ?</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <a href="{% url 'blog:list' %}" class="btn btn-primary border-0 me-2">Cancel</a>
+            <button type="submit" class="btn btn-primary bg-danger border-0">Delete</button>
+        </form>
+    </div>
     
 {% endblock content %}
