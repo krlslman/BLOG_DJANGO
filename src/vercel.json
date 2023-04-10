@@ -1,19 +1,30 @@
 {
     "version": 2,
     "builds": [
-      { "src": "manage.py", "use": "@vercel/python" }
+        {
+            "src": "src/**",
+            "use": "@now/python",
+            "config": {
+                "maxLambdaSize": "2048mb"
+            },
+            "env": {
+                "PYTHONPATH": "/app/src"
+            }
+        }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "http://localhost:8000" }
+        {
+            "src": "/(.*)",
+            "dest": "/src/blog_app/wsgi.py"
+        }
     ],
     "env": {
-      "DJANGO_SETTINGS_MODULE": "blog_app.settings"
+        "DJANGO_SETTINGS_MODULE": "blog_app.settings"
     },
-    "frameworks": {
-      "python": {
-        "buildCommand": "python -m pip install -r requirements.txt && ./env/Scripts/python.exe manage.py runserver",
-        "startCommand": "./env/Scripts/python.exe manage.py runserver"
-      }
+    "build": {
+        "env": {
+            "CI": "true"
+        },
+        "command": "cd src && source ../env/bin/activate && pip install -r ../requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT"
     }
-  }
-  
+}
