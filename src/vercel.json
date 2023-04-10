@@ -1,28 +1,19 @@
 {
+    "version": 2,
     "builds": [
-      {
-        "src": "manage.py",
-        "use": "@vercel/python"
-      }
+      { "src": "manage.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "http://localhost:8000" }
     ],
     "env": {
       "DJANGO_SETTINGS_MODULE": "blog_app.settings"
     },
-    "functions": {
-      "api/*": {
-        "memory": 128,
-        "maxDuration": 10
+    "frameworks": {
+      "python": {
+        "buildCommand": "python -m pip install -r requirements.txt && ./env/Scripts/python.exe manage.py runserver",
+        "startCommand": "./env/Scripts/python.exe manage.py runserver"
       }
-    },
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "api/:1"
-      }
-    ],
-    "python": {
-      "version": "3.11",
-      "install": "venv/bin/python"
     }
   }
   
