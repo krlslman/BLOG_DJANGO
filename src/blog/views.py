@@ -3,6 +3,7 @@ from .models import Post, Like
 from .forms import PostForm, CommentForm
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def post_list(request):  # to list our post on the page
@@ -24,6 +25,8 @@ def post_create(request):
             post = form.save(commit=False)  # save but dont send to db yet
             post.author = request.user  # set author
             post.save()  # now save and send db
+            messages.success(request, "Post is created successfully!")
+
             return redirect("blog:list")  # in urls.py > app_name : path name
     context = {
         'form': form
@@ -53,9 +56,12 @@ def post_update(request, slug):
     obj = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=obj)  # instance brings the form filled with the data
     if request.user.id != obj.author.id:
+        messages.warning(request, "You are not the author of the post")
         return HttpResponse("You are not authorized!")
     if form.is_valid():
         form.save()
+        messages.success(request, "Post is updated successfully!")
+
         return redirect("blog:list")
     
     context = {
@@ -68,9 +74,11 @@ def post_update(request, slug):
 def post_delete(request, slug):
     obj = get_object_or_404(Post, slug=slug)
     if request.user.id != obj.author.id:
+        messages.warning(request, "You are not the author of the post")
         return HttpResponse("You are not authorized!")
     if request.method == "POST":
         obj.delete()
+        messages.success(request, "Post is deleted successfully!")
         return redirect("blog:list")
     context = {
         "object": obj

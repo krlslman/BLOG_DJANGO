@@ -13,6 +13,19 @@
     {% include 'navbar.html' %}
 
     <div class="container mt-5">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            <script>
+            setTimeout(function() {
+                document.querySelector('.alert').remove();
+            }, 3000);
+            </script>
+        {% endif %}
+
         {% block content %}
     
         {% endblock content %}
