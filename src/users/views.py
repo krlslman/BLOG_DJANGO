@@ -10,6 +10,8 @@ def register(request):
             return redirect("blog:list")
     if form.is_valid():
         form.save()
+        name = form.cleaned_data["username"]
+        messages.success(request, f"Account created for {name}")        
         return redirect("login")
     
     context = {
