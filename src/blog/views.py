@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, Like
+from .models import Post, Like, PostView
 from .forms import PostForm, CommentForm
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -36,6 +36,9 @@ def post_create(request):
 def post_detail(request, slug):
     form = CommentForm()
     obj = get_object_or_404(Post, slug=slug)
+    if request.user.is_authenticated:
+        # PostView.objects.create(user=request.user, post=obj)  # postview count for each click
+        PostView.objects.get_or_create(user=request.user, post=obj)  # postview count for each unique user's click
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
