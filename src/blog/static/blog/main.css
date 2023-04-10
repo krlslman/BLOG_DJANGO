@@ -77,6 +77,11 @@ body {
     gap: 1rem;
     margin-bottom: 2rem;
 }
-.media .textarea {
+.form-group .textarea {
     height: 5rem;
+}
+.navbar-profile-img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
 }

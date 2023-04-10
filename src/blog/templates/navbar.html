@@ -109,14 +109,31 @@
             </a>
           </li> -->
         </ul>
-        <div class="endpart d-flex gap-1 justify-content-center">
+        <div class="endpart d-flex gap-1 justify-content-center align-items-center">
           <form role="search" class="col-6 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <input class="form-control form-control-dark text-bg-dark" type="search" placeholder="Search" aria-label="Search">
           </form>
           <div class="text-end d-flex">
             {% if user.is_authenticated %}
-              <a href="{% url 'profile' %}" class="btn btn-outline-warning " style="min-width: fit-content; height: 37px; text-transform: capitalize;">{{ user.username }}</a>
-            {% else %}
+              <!-- <a href="{% url 'profile' %}" class="btn btn-outline-warning " style="min-width: fit-content; height: 37px; text-transform: capitalize;">{{ user.username }}</a> -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">asdasd</span>
+              </button>
+
+              <div class="btn-group">
+                <button type="button" class="btn text-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img class="rounded-circle navbar-profile-img" src="{{ user.profile.photo.url }}" alt="pp image">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <p class="dropdown-item text-muted text-center" disabled style=" pointer-events: none; user-select: none;">{{ user.username }}</p>
+                  <li><a class="dropdown-item" href="{% url 'profile' %}" style="min-width: fit-content; height: 37px;">Update Profile</a></li>
+                  <li><a class="dropdown-item text-danger" href="{% url 'logout' %}" style="min-width: fit-content; height: 37px;">Sign Out</a></li>
+                </ul>
+              </div>
+
+
+
+              {% else %}
               <a href="{% url 'login' %}" type="button" class="btn btn-outline-light me-2" style="min-width: fit-content; height: 37px;">Sign In</a>
               <a href="{% url 'register' %}" class="btn btn-warning" style="min-width: fit-content; height: 37px">Sign Up</a>
             {% endif %}
