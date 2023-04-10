@@ -1,13 +1,28 @@
 {
-    "builds": [{
-        "src": "src/blog_app/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
-    }],
+    "builds": [
+      {
+        "src": "manage.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "env": {
+      "DJANGO_SETTINGS_MODULE": "blog_app.settings"
+    },
+    "functions": {
+      "api/*": {
+        "memory": 128,
+        "maxDuration": 10
+      }
+    },
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "src/blog_app/wsgi.py"
-        }
-    ]
-}
+      {
+        "src": "/api/(.*)",
+        "dest": "api/:1"
+      }
+    ],
+    "python": {
+      "version": "3.11",
+      "install": "venv/bin/python"
+    }
+  }
+  
