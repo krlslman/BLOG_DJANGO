@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
 from decouple import config
-import dj_database_url
+# import dj_database_url
 
-DATABASE_URL = config("DATABASE_URL")
+# DATABASE_URL = config("DATABASE_URL")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -70,10 +70,12 @@ WSGI_APPLICATION = 'blog_app.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    #? sqlite3 | django's default 
+     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+     }
+    #? postgresql | tested for deployment on Railway
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'NAME': str(BASE_DIR / 'railway'),
@@ -82,8 +84,19 @@ DATABASES = {
     #     'HOST': config("RAILWAY_DB_HOST"),
     #     'PORT': '6076',
     # }
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
+    #? postgresql | alternative way to deploy on Railway
+    # 'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1800)
+    #? mysql | tested for deployment on pythonAnywhere
+    #'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'NAME': 'db_blog',
+    #    'USER': 'koral',
+    #    'PASSWORD': config("MYSQL_PASSWORD"),
+    #    'HOST': 'localhost',
+    #    'PORT': '3306',
+    #}
 }
+
 
 
 # Password validation
